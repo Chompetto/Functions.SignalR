@@ -36,7 +36,7 @@ namespace Functions.SignalR.Services
         {
             Claim identity = null;
 
-            if (_RequireIdentity && string.IsNullOrEmpty(userId)) { throw new Exception("UserId must be provided"); }
+            if (_RequireIdentity && string.IsNullOrEmpty(userId)) { throw new ArgumentNullException("UserId must be provided"); }
             else
             {
                 identity = new Claim(ClaimTypes.NameIdentifier, userId);

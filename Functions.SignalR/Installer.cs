@@ -7,9 +7,9 @@ using System.Text.RegularExpressions;
 
 namespace Functions.SignalR
 {
-    public class Installer
+    public static class Installer
     {
-        public Installer(ServiceCollection serviceCollection, string connectionString, TimeSpan tokenDuration, bool requireIdentity = true)
+        public static IServiceCollection AddServices(this ServiceCollection serviceCollection, string connectionString, TimeSpan tokenDuration, bool requireIdentity = true)
         {
             //Parse connection string and validate it.
             (var EndPoint, var AccessKey, var Version) = ParseConnectionString(connectionString);
@@ -18,12 +18,14 @@ namespace Functions.SignalR
                 new SignalrService(EndPoint, AccessKey, 
                 new TokenService(EndPoint, AccessKey, tokenDuration, requireIdentity),
                 new EndPointService(EndPoint)));
+
+            return serviceCollection;
         }
 
         /// <summary>
         /// Parses the connection string (that the SignalRService provides) into a tuple.
         /// </summary>
-        private (string EndPoint, string AccessKey, string Version) ParseConnectionString(string connectionString)
+        private static (string EndPoint, string AccessKey, string Version) ParseConnectionString(string connectionString)
         {
             if (string.IsNullOrEmpty(connectionString))
             {

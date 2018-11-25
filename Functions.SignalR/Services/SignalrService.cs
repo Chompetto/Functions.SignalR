@@ -43,9 +43,9 @@ namespace Functions.SignalR.Services
 
         public async Task AddUserToGroup(string hub, string group, string userId)
         {
-            if (string.IsNullOrEmpty(hub)) { throw new Exception("Hub must have a value provided"); }
-            if (string.IsNullOrEmpty(group)) { throw new Exception("Group must have a value provided"); }
-            if (string.IsNullOrEmpty(userId)) { throw new Exception("UserId must have a value provided"); }
+            if (string.IsNullOrEmpty(hub)) { throw new ArgumentNullException("Hub must have a value provided"); }
+            if (string.IsNullOrEmpty(group)) { throw new ArgumentNullException("Group must have a value provided"); }
+            if (string.IsNullOrEmpty(userId)) { throw new ArgumentNullException("UserId must have a value provided"); }
 
             await SendRequest(_EndPointService.RemoveUserFromGroup(hub, group, userId), hub, HttpMethod.Put);
         }
@@ -62,35 +62,35 @@ namespace Functions.SignalR.Services
 
         public async Task RemoveUserFromGroup(string hub, string group, string userId)
         {
-            if (string.IsNullOrEmpty(hub)) { throw new Exception("Hub must have a value provided"); }
-            if (string.IsNullOrEmpty(group)) { throw new Exception("Group must have a value provided"); }
-            if (string.IsNullOrEmpty(userId)) { throw new Exception("UserId must have a value provided"); }
+            if (string.IsNullOrEmpty(hub)) { throw new ArgumentNullException("Hub must have a value provided"); }
+            if (string.IsNullOrEmpty(group)) { throw new ArgumentNullException("Group must have a value provided"); }
+            if (string.IsNullOrEmpty(userId)) { throw new ArgumentNullException("UserId must have a value provided"); }
 
             await SendRequest(_EndPointService.RemoveUserFromGroup(hub, group, userId), hub, HttpMethod.Delete);
         }
 
         public async Task SendToAll(string hub, string targetMethod, object[] data)
         {
-            if (string.IsNullOrEmpty(hub)) { throw new Exception("Hub must have a value provided"); }
-            if (string.IsNullOrEmpty(targetMethod)) { throw new Exception("TargetMethod must have a value provided"); }
+            if (string.IsNullOrEmpty(hub)) { throw new ArgumentNullException("Hub must have a value provided"); }
+            if (string.IsNullOrEmpty(targetMethod)) { throw new ArgumentNullException("TargetMethod must have a value provided"); }
 
             await SendRequest(_EndPointService.SendToAll(hub), hub, HttpMethod.Post, targetMethod, data);
         }
 
         public async Task SendToGroup(string hub, string group, string targetMethod, object[] data)
         {
-            if (string.IsNullOrEmpty(hub)) { throw new Exception("Hub must have a value provided"); }
-            if (string.IsNullOrEmpty(group)) { throw new Exception("Group must have a value provided"); }
-            if (string.IsNullOrEmpty(targetMethod)) { throw new Exception("TargetMethod must have a value provided"); }
+            if (string.IsNullOrEmpty(hub)) { throw new ArgumentNullException("Hub must have a value provided"); }
+            if (string.IsNullOrEmpty(group)) { throw new ArgumentNullException("Group must have a value provided"); }
+            if (string.IsNullOrEmpty(targetMethod)) { throw new ArgumentNullException("TargetMethod must have a value provided"); }
 
             await SendRequest(_EndPointService.SendToGroup(hub, group), hub, HttpMethod.Post, targetMethod, data);
         }
 
         public async Task SendToUser(string hub, string userId, string targetMethod, object[] data)
         {
-            if (string.IsNullOrEmpty(hub)) { throw new Exception("Hub must have a value provided"); }
-            if (string.IsNullOrEmpty(userId)) { throw new Exception("UserId must have a value provided"); }
-            if (string.IsNullOrEmpty(targetMethod)) { throw new Exception("TargetMethod must have a value provided"); }
+            if (string.IsNullOrEmpty(hub)) { throw new ArgumentNullException("Hub must have a value provided"); }
+            if (string.IsNullOrEmpty(userId)) { throw new ArgumentNullException("UserId must have a value provided"); }
+            if (string.IsNullOrEmpty(targetMethod)) { throw new ArgumentNullException("TargetMethod must have a value provided"); }
 
             await SendRequest(_EndPointService.SendToUser(hub, userId), hub, HttpMethod.Post, targetMethod, data);
         }
